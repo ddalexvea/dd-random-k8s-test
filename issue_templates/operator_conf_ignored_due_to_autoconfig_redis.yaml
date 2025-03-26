@@ -1,0 +1,22 @@
+description: "Datadog Operator-configured Redis integration is ignored due to Autodiscovery auto-configuration taking precedence"
+file: app.yaml
+modifications:
+  - op: add
+    path: metadata.annotations."ad.datadoghq.com/redis.checks"
+    value: >
+      {
+        "redisdb": {
+          "instances": [
+            {
+              "host": "%%host%%",
+              "port": 6379
+            }
+          ]
+        }
+      }
+  - op: add
+    path: metadata.annotations."ad.datadoghq.com/redis.init_configs"
+    value: "[{}]"
+tip: "Even if you configure Redis via Helm or the Datadog Operator, AD annotations override that. To allow Operator config to take effect, remove AD annotations or disable Autodiscovery auto-config via `DD_AUTO_CONFIG_ENABLED=false`."
+points: 7
+url: "https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=operator#integration-config-precedence"
