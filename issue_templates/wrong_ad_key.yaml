@@ -1,0 +1,9 @@
+description: "App uses an incorrect annotation key for Datadog autodiscovery"
+file: app.yaml
+modifications:
+  - op: replace
+    path: metadata.annotations."ad.datadog.com/nginx.checks"
+    value: '{"nginx": {"instances": [{"nginx_status_url": "http://%%host%%/nginx_status"}]}}'
+tip: "The correct key prefix is `ad.datadoghq.com`, not `ad.datadog.com`."
+points: 4
+url: "https://docs.datadoghq.com/containers/kubernetes/autodiscovery"
