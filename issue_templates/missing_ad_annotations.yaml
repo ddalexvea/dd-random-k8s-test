@@ -1,0 +1,8 @@
+description: "App is missing autodiscovery annotations for Datadog integration"
+file: app.yaml
+modifications:
+  - op: remove
+    path: metadata.annotations
+tip: "Without proper annotations, Datadog cannot auto-detect and configure the integration."
+points: 5
+url: "https://docs.datadoghq.com/containers/kubernetes/autodiscovery"
